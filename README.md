@@ -25,9 +25,9 @@ Done! Application is running
 
 ---
 ## Endpoints
-> /api/v1/{chess_figure}/{current_field}
+> [GET] /api/v1/{chess_figure}/{current_field}
 
->  /api/v1/{chess_figure}/{current_field}/{dest_field}
+> [GET] /api/v1/{chess_figure}/{current_field}/{dest_field}
 
 ### Parameters
 - **chess_figure**
