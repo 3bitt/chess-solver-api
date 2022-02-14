@@ -1,0 +1,43 @@
+# Chess Solver
+### Setup instructions
+Clone repo
+Create virtual environment with **Python 3.9** with your favourite tool
+Activate virtualenv and install dependencies
+`pip install -r requirements.txt`
+Create file with name `.env` in project root and define your variables (example below)
+```
+SECRET_KEY="an#1b7k5i)=$t1@ke9429s@01n51=*iel(iyy*bazil@pc4gt&2exm"
+DEBUG=1
+```
+Run server
+`python src/manage.py runserver`
+
+Done! Application is running
+
+ **To run tests type**
+`pytest src`
+
+---
+### Endpoints
+> /api/v1/{chess_figure}/{current_field}
+>  /api/v1/{chess_figure}/{current_field}/{dest_field}
+
+- **chess_figure**
+king **|** queen **|** rook **|** bishop **|** knight **|** pawn
+
+- **current_field / dest_field**
+	[a-h][1-8] - first character between a-h, second character between 1-8 (example: a4, h7)
+---
+### Examples
+>  **/api/v1/rook/d5/**
+>  
+>  response:
+`{"availableMoves":["E5","C5","D6","D4","F5","B5","D7","D3","G5","A5","D8","D2","H5","D1"],"error":null,"figure":"rook","currentField":"D5"}`
+
+...
+
+> **/api/v1/king/a1/a2/**
+> 
+> response:
+`{"move":"valid","figure":"king","error":null,"currentField":"A1","destField":"A2"}`
+
