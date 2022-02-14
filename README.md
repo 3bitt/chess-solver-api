@@ -29,6 +29,7 @@ Done! Application is running
 
 >  /api/v1/{chess_figure}/{current_field}/{dest_field}
 
+### Parameters
 - **chess_figure**
 
     king **|** queen **|** rook **|** bishop **|** knight **|** pawn
