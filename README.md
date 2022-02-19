@@ -51,7 +51,7 @@
     "currentField":"D5"
 }
 ```
-...
+<br/>
 
 > **/api/v1/king/a1/a2/**
 ```json
@@ -60,6 +60,7 @@
     "figure":"king",
     "error":null,
     "currentField":"A1",
-    "destField":"A2"}
+    "destField":"A2"
+}
 ```
 
