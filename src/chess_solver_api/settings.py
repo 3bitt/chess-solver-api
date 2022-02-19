@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", None)
 
 DEBUG = os.getenv("DEBUG", 0)
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 INSTALLED_APPS = [
@@ -36,11 +36,13 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
+        "solver.renderers.CustomJSONRenderer",
         "rest_framework.renderers.JSONRenderer",
     ],
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "EXCEPTION_HANDLER": "solver.exception_handler.custom_exception_handler",
 }
 
 ROOT_URLCONF = "chess_solver_api.urls"
