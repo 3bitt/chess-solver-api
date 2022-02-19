@@ -25,12 +25,6 @@ class ConflictException_409(APIException):
     default_code = "field_does_not_exist"
 
 
-class MoveNotPermittedException_409(APIException):
-    status_code = status.HTTP_409_CONFLICT
-    default_detail = "Current move is not permitted."
-    default_code = "field_does_not_exist"
-
-
 class NotFoundException_404(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = "Figure not found."

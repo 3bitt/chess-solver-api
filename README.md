@@ -1,4 +1,4 @@
-# Chess Solver
+# Chess Solver API
 
 ## Setup instructions
 1. Clone repo
