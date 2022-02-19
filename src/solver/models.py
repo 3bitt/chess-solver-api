@@ -94,7 +94,6 @@ class King(Figure, CanMoveHorizontally, CanMoveVertically, CanMoveDiagonally):
             result += clear_invalid_positions(
                 horizontal_moves + vertical_moves + diagonal_moves
             )
-
         return result
 
 
