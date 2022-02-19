@@ -3,7 +3,7 @@
 ## Setup instructions
 1. Clone repo
 
-2. Create virtual environment with **Python 3.9** with your favourite tool
+2. Create virtual environment with **Python 3.9** using your favourite tool
 
 3. Activate virtualenv and install dependencies
 
@@ -21,7 +21,7 @@
 
 6. Have fun ;)
 
- **To run tests use `pytest src` command**
+ **To run tests use `pytest` command**
 
 <br/>
 
