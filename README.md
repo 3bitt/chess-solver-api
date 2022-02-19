@@ -1,29 +1,31 @@
 # Chess Solver
+
 ## Setup instructions
-Clone repo
+1. Clone repo
 
-Create virtual environment with **Python 3.9** with your favourite tool
+2. Create virtual environment with **Python 3.9** with your favourite tool
 
-Activate virtualenv and install dependencies
+3. Activate virtualenv and install dependencies
 
-`pip install -r requirements.txt`
+	`pip install -r requirements.txt`
 
-Create file with name `.env` in project root and define your variables (example below)
-```
-SECRET_KEY="an#1b7k5i)=$t1@ke9429s@01n51=*iel(iyy*bazil@pc4gt&2exm"
-DEBUG=1
-```
-Run server
+4. Create file with name `.env` in project root and define your variables, for example:
+	```
+	SECRET_KEY="an#1b7k5i)=$t1@ke9429s@01n51=*iel(iyy*bazil@pc4gt&2exm"
+	DEBUG=1
+	```
 
-`python src/manage.py runserver`
+5. Run server
 
-Done! Application is running
+	`python src/manage.py runserver`
 
- **To run tests type**
+6. Have fun ;)
 
-`pytest src`
+ **To run tests use `pytest src` command**
 
----
+<br/>
+
+
 ## Endpoints
 > [GET] /api/v1/{chess_figure}/{current_field}
 
@@ -37,7 +39,8 @@ Done! Application is running
 - **current_field / dest_field**
 
 	[a-h][1-8] - first character between a-h, second character between 1-8 (example: a4, h7)
----
+<br/>
+
 ## Examples
 >  **/api/v1/rook/d5/**
 ```json
