@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from solver.exceptions import NotFoundException_404
 from solver.utils import (
     normalize_position_format,
     clear_invalid_positions,
@@ -62,11 +63,10 @@ class FigureFactory:
             "pawn": Pawn,
         }.get(figure, None)
 
-        if figure is not None:
-            obj = figure(position)
-            return obj
+        if figure is None:
+            raise NotFoundException_404("Figure not found.")
         else:
-            raise KeyError
+            return figure(position)
 
 
 class King(Figure, CanMoveHorizontally, CanMoveVertically, CanMoveDiagonally):

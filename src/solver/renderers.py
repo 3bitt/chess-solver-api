@@ -1,5 +1,5 @@
 from rest_framework.renderers import JSONRenderer
-from solver.exception_handler import DefaultServerErrorException_500
+from solver.exceptions import DefaultServerErrorException_500
 
 
 def zero_as_none(value):
