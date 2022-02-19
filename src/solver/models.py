@@ -8,7 +8,9 @@ from solver.utils import (
 class Figure(ABC):
     @abstractmethod
     def __init__(self, current_field: str) -> None:
-        pass
+        self.position = normalize_position_format(current_field)
+        self.x = self.position[0]
+        self.y = self.position[1]
 
     @abstractmethod
     def list_available_moves(self) -> list[str]:
@@ -17,6 +19,35 @@ class Figure(ABC):
     @abstractmethod
     def validate_move(self, dest_field: str):
         pass
+
+
+class CanMoveHorizontally:
+    def get_horizontal_move_options(self, distance: int) -> list[str]:
+        to_right = chr(ord(self.x) + distance) + self.y
+        to_left = chr(ord(self.x) - distance) + self.y
+        return [to_right, to_left]
+
+
+class CanMoveVertically:
+    def get_vertical_move_options(self, distance: int) -> list[str]:
+        upwards = self.x + chr(ord(self.y) + distance)
+        downwards = self.x + chr(ord(self.y) - distance)
+        return [upwards, downwards]
+
+
+class CanMoveDiagonally:
+    def get_diagonal_move_options(self, distance: int) -> list[str]:
+        right_upward = chr(ord(self.x) + distance) + chr(
+            ord(self.y) + distance
+        )
+        right_downward = chr(ord(self.x) + distance) + chr(
+            ord(self.y) - distance
+        )
+        left_upward = chr(ord(self.x) - distance) + chr(ord(self.y) + distance)
+        left_downward = chr(ord(self.x) - distance) + chr(
+            ord(self.y) - distance
+        )
+        return [right_upward, right_downward, left_upward, left_downward]
 
 
 class FigureFactory:
@@ -38,13 +69,11 @@ class FigureFactory:
             raise KeyError
 
 
-class King(Figure):
+class King(Figure, CanMoveHorizontally, CanMoveVertically, CanMoveDiagonally):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.min_range = 1
         self.max_range = 1
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "king"
@@ -68,37 +97,12 @@ class King(Figure):
 
         return result
 
-    def get_horizontal_move_options(self, distance: int) -> list[str]:
-        to_right = chr(ord(self.x) + distance) + self.y
-        to_left = chr(ord(self.x) - distance) + self.y
-        return [to_right, to_left]
 
-    def get_vertical_move_options(self, distance: int) -> list[str]:
-        upwards = self.x + chr(ord(self.y) + distance)
-        downwards = self.x + chr(ord(self.y) - distance)
-        return [upwards, downwards]
-
-    def get_diagonal_move_options(self, distance: int) -> list[str]:
-        right_upward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) + distance
-        )
-        right_downward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) - distance
-        )
-        left_upward = chr(ord(self.x) - distance) + chr(ord(self.y) + distance)
-        left_downward = chr(ord(self.x) - distance) + chr(
-            ord(self.y) - distance
-        )
-        return [right_upward, right_downward, left_upward, left_downward]
-
-
-class Queen(Figure):
+class Queen(Figure, CanMoveHorizontally, CanMoveVertically, CanMoveDiagonally):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.min_range = 1
         self.max_range = 7
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "queen"
@@ -121,37 +125,12 @@ class Queen(Figure):
             )
         return result
 
-    def get_horizontal_move_options(self, distance: int) -> list[str]:
-        to_right = chr(ord(self.x) + distance) + self.y
-        to_left = chr(ord(self.x) - distance) + self.y
-        return [to_left, to_right]
 
-    def get_vertical_move_options(self, distance: int) -> list[str]:
-        upwards = self.x + chr(ord(self.y) + distance)
-        downwards = self.x + chr(ord(self.y) - distance)
-        return [upwards, downwards]
-
-    def get_diagonal_move_options(self, distance: int) -> list[str]:
-        right_upward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) + distance
-        )
-        right_downward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) - distance
-        )
-        left_upward = chr(ord(self.x) - distance) + chr(ord(self.y) + distance)
-        left_downward = chr(ord(self.x) - distance) + chr(
-            ord(self.y) - distance
-        )
-        return [right_upward, right_downward, left_upward, left_downward]
-
-
-class Rook(Figure):
+class Rook(Figure, CanMoveHorizontally, CanMoveVertically):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.min_range = 1
         self.max_range = 7
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "rook"
@@ -173,24 +152,12 @@ class Rook(Figure):
             )
         return result
 
-    def get_horizontal_move_options(self, distance: int) -> list[str]:
-        to_right = chr(ord(self.x) + distance) + self.y
-        to_left = chr(ord(self.x) - distance) + self.y
-        return [to_right, to_left]
 
-    def get_vertical_move_options(self, distance: int) -> list[str]:
-        upwards = self.x + chr(ord(self.y) + distance)
-        downwards = self.x + chr(ord(self.y) - distance)
-        return [upwards, downwards]
-
-
-class Bishop(Figure):
+class Bishop(Figure, CanMoveDiagonally):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.min_range = 1
         self.max_range = 7
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "bishop"
@@ -209,27 +176,12 @@ class Bishop(Figure):
             result += clear_invalid_positions(diagonal_moves)
         return result
 
-    def get_diagonal_move_options(self, distance: int) -> list[str]:
-        right_upward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) + distance
-        )
-        right_downward = chr(ord(self.x) + distance) + chr(
-            ord(self.y) - distance
-        )
-        left_upward = chr(ord(self.x) - distance) + chr(ord(self.y) + distance)
-        left_downward = chr(ord(self.x) - distance) + chr(
-            ord(self.y) - distance
-        )
-        return [right_upward, right_downward, left_upward, left_downward]
 
-
-class Knight(Figure):
+class Knight(Figure, CanMoveHorizontally, CanMoveVertically):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.min_range = 2
         self.max_range = 3
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "knight"
@@ -272,12 +224,10 @@ class Knight(Figure):
         return [upper_right, upper_left, downer_right, downer_left]
 
 
-class Pawn(Figure):
+class Pawn(Figure, CanMoveVertically):
     def __init__(self, current_field: str) -> None:
-        self.position = normalize_position_format(current_field)
         self.max_range = 1
-        self.x = self.position[0]
-        self.y = self.position[1]
+        super().__init__(current_field)
 
     def __str__(self) -> str:
         return "pawn"
