@@ -21,7 +21,7 @@ class Figure(ABC):
 
 class FigureFactory:
     @classmethod
-    def create_figure(self, figure: str, init_args: str) -> Figure:
+    def create_figure(self, figure: str, position: str) -> Figure:
         figure = {
             "king": King,
             "queen": Queen,
@@ -32,7 +32,7 @@ class FigureFactory:
         }.get(figure, None)
 
         if figure is not None:
-            obj = figure(init_args)
+            obj = figure(position)
             return obj
         else:
             raise KeyError
