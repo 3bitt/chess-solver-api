@@ -22,21 +22,21 @@ class Figure(ABC):
 
 
 class CanMoveHorizontally:
-    def get_horizontal_move_options(self, distance: int) -> list[str]:
+    def get_horizontal_move_options(self: Figure, distance: int) -> list[str]:
         to_right = chr(ord(self.x) + distance) + self.y
         to_left = chr(ord(self.x) - distance) + self.y
         return [to_right, to_left]
 
 
 class CanMoveVertically:
-    def get_vertical_move_options(self, distance: int) -> list[str]:
+    def get_vertical_move_options(self: Figure, distance: int) -> list[str]:
         upwards = self.x + chr(ord(self.y) + distance)
         downwards = self.x + chr(ord(self.y) - distance)
         return [upwards, downwards]
 
 
 class CanMoveDiagonally:
-    def get_diagonal_move_options(self, distance: int) -> list[str]:
+    def get_diagonal_move_options(self: Figure, distance: int) -> list[str]:
         right_upward = chr(ord(self.x) + distance) + chr(
             ord(self.y) + distance
         )
