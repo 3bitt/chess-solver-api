@@ -1,28 +1,10 @@
 # Chess Solver API
 
 ## Setup instructions
-1. Clone repo
 
-2. Create virtual environment with **Python 3.9** using your favourite tool
-
-3. Activate virtualenv and install dependencies
-
-	`pip install -r requirements.txt`
-
-4. Create file with name `.env` in project root and define your variables, for example:
-	```
-	SECRET_KEY="an#1b7k5i)=$t1@ke9429s@01n51=*iel(iyy*bazil@pc4gt&2exm"
-	DEBUG=1
-	```
-
-5. Run server
-
-	`python src/manage.py runserver`
-
-6. Have fun ;)
-
- **To run tests use `pytest` command**
-
+| Docker  | Manual |
+| ------------- | ------------- |
+| <p>1. Build image <br> &emsp; `docker build -t chess-solver-api`</p> <p>2. Run container <br> &emsp; `docker run -dp 8000:8000 chess-solver-api`</p> <p>3. Access API, for example <br> &emsp; `http://localhost:8000/api/v1/king/a2/` </p> | <p>1. Clone or download repo</p> <p>2. Create virtual environment with **Python 3.9**</p> <p>3. Activate virtualenv and install dependencies <br> &emsp; `pip install -r requirements.txt`</p> <p>4. Run server <br> &emsp; `python src/manage.py runserver`</p> <p>5. Access API, for example <br> &emsp; `http://localhost:8000/api/v1/king/a2/`</p> <tr><td colspan=2>Have fun!</td></tr><tr><td colspan=2>**To run tests use `pytest` command**</td></tr>
 <br/>
 
 
